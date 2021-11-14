@@ -1,13 +1,27 @@
-function ChatWindow() {
+class ChatWindow extends React.Component {
 
-    this.state = {
-        brand: "Ford",
-        model: "Mustang",
-        color: "red",
-        year: 1964
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            showClass: props.data.show,
+        }
+        this.handleClick = this.handleClick.bind(this)
 
-    function getChatMessagesData() {
+        this.update()
+    }
+
+    handleClick() {
+        if (this.state.showClass == "show")
+            this.setState({ showClass: "hide" })
+        else
+            this.setState({ showClass: "show" })
+    }
+
+    update() {
+
+    }
+
+    getChatMessagesData() {
         var date = new Date()
         var dateData = date.toDateString()
         var data = { user: { id: null, username: null, email: null }, comment: { id: null, cityName: null, author: null, date: null, content: null } }
@@ -18,14 +32,18 @@ function ChatWindow() {
         return [message1, message2, message3, message1]
     }
 
-    return (
-        <div className="chat-window">
-            <div className="chat-header-container">
-                <h1>chat</h1>
-                <div className="chat-hide-btn">Hide chat</div>
-            </div>
+    render() {
+        return (
+            <div>
+                <div className="chat-hide-btn" onClick={this.handleClick}>Hide chat</div>
+                <div className={"chat-window " + this.state.showClass}>
+                    <div className="chat-header-container">
+                        <h1>chat</h1>
+                    </div>
 
-            <ChatMessages data={getChatMessagesData()}></ChatMessages>
-        </div>
-    )
+                    <ChatMessages data={this.getChatMessagesData()}></ChatMessages>
+                </div>
+            </div>
+        )
+    }
 }

@@ -15,7 +15,11 @@ function WeatherTable({ data }) {
     return (
         <div className="weather-table">
             <div className="header-wrapper">
-                <h1>{data.cityName}</h1>
+                <h1>{data.info.cityName}</h1>
+                <span>Country: {data.info.country}, </span>
+                <span>Geodata: {data.info.geodata}, </span>
+                <span>Zip code: {data.info.zipCode}</span>
+                <div>Description: {data.info.description}</div>
                 <div className="climate-code-container">
                     <div className="climate-code-color" style={{ backgroundColor: data.climateCode.color }}></div>
                     {data.climateCode.code} - {data.climateCode.name}
